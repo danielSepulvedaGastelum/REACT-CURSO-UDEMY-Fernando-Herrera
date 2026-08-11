@@ -12,13 +12,22 @@ const createImageInsideDOM = ( url: string) =>{
     document.body.append(imageElement);
 }
 
-myRequest
-.then( response => response.json())
-.then( ( { data } : GyphyRandomeResponse ) => {
-    // Esta linea ahora se hace con el tipado estricto, te recomienda todos los niveles del JSON y no puede ser diferente
-    const imageUrl = data.images.original.url;
-    createImageInsideDOM (imageUrl);
-})
-.catch( err => {
-    console.error(err);
-});
+
+const getRandomeGifUrl = async (): Promise<string>=>{
+    const response = await fetch(`https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=&rating=g`);
+    // : GyphyRandomeResponse para especificar que lo que se recive es de este tipo pero solo se puede usar esto si lo que se recive 
+    // en la promesa de .json() es un GyphyRandomeResponse, de lo contratio es un error
+    const { data }: GyphyRandomeResponse = await response.json();
+    return data.images.original.url;
+}
+
+
+
+
+// getRandomeGifUrl().then(
+//     url => createImageInsideDOM(url)
+// );
+
+
+// Si solo pasas argumento que solo se pasan como referencia a una función se puede simplificar así, mandando la sgunda función como referencia:
+getRandomeGifUrl().then(createImageInsideDOM);
