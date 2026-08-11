@@ -5,7 +5,12 @@ import './style.css'
 // import './bases/04-array'
 // import './bases/05-functions'
 // import './bases/06-obj-destructuring'
-import './bases/07-array-destructuriong'
+// import './bases/07-array-destructuriong'
+// import './bases/08-imp-exp'
+import './bases/09-promises'
+
+// import { getHeroByOwner } from './bases/08-imp-exp'
+// import { Owner2 } from './data/heroes.data'
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 
@@ -14,3 +19,5 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 
 `
+
+// console.log(getHeroByOwner(Owner2.DC))
